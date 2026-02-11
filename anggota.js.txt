@@ -1,0 +1,205 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle antara Login dan Register
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    // Fungsi toggle form
+    function showLogin() {
+        loginBtn.classList.add('active');
+        registerBtn.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+    }
+
+    function showRegister() {
+        registerBtn.classList.add('active');
+        loginBtn.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+    }
+
+    loginBtn.addEventListener('click', showLogin);
+    registerBtn.addEventListener('click', showRegister);
+
+    // Toggle password visibility
+    const togglePassword = document.querySelector('.toggle-password');
+    if (togglePassword) {
+        togglePassword.addEventListener('click', function() {
+            const passwordInput = document.getElementById('loginPassword');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // ============ HANDLE LOGIN ============
+    const loginFormElement = document.getElementById('login');
+    loginFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const remember = document.querySelector('.remember-forgot input[type="checkbox"]').checked;
+
+        // Validasi sederhana
+        if (!email || !password) {
+            showNotification('Mohon isi email dan password!', 'error');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showNotification('Email tidak valid!', 'error');
+            return;
+        }
+
+        if (password.length < 6) {
+            showNotification('Password minimal 6 karakter!', 'error');
+            return;
+        }
+
+        // Simulasi login berhasil
+        console.log('Login attempt:', { email, password, remember });
+        showNotification('Login berhasil! Selamat datang di Perpustakaan Digital.', 'success');
+        
+        // Redirect setelah 2 detik
+        setTimeout(() => {
+            window.location.href = '/dashboard';
+        }, 2000);
+    });
+
+    // ============ HANDLE REGISTER ============
+    const registerFormElement = document.getElementById('register');
+    registerFormElement.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nis = document.getElementById('regNIS').value;
+        const nama = document.getElementById('regNama').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const kelas = document.getElementById('regKelas').value;
+        const terms = document.querySelector('.terms input[type="checkbox"]').checked;
+
+        // Validasi
+        if (!nis || !nama || !email || !password || !kelas) {
+            showNotification('Mohon isi semua field!', 'error');
+            return;
+        }
+
+        if (nis.length < 5) {
+            showNotification('NIS minimal 5 karakter!', 'error');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showNotification('Email tidak valid!', 'error');
+            return;
+        }
+
+        if (password.length < 6) {
+            showNotification('Password minimal 6 karakter!', 'error');
+            return;
+        }
+
+        if (!kelas) {
+            showNotification('Mohon isi kelas!', 'error');
+            return;
+        }
+
+        if (!terms) {
+            showNotification('Anda harus menyetujui Syarat & Ketentuan!', 'error');
+            return;
+        }
+
+        // Simulasi registrasi berhasil
+        console.log('Register attempt:', { nis, nama, email, password, kelas });
+        showNotification('Registrasi berhasil! Silakan login.', 'success');
+        
+        // Kembali ke form login setelah 2 detik
+        setTimeout(() => {
+            showLogin();
+            registerFormElement.reset();
+        }, 2000);
+    });
+
+    // Validasi email
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Notifikasi custom
+    function showNotification(message, type) {
+        // Hapus notifikasi yang sudah ada
+        const existingNotification = document.querySelector('.notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        // Buat elemen notifikasi
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        `;
+
+        // Style notifikasi
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 9999;
+            animation: slideInRight 0.3s ease;
+            font-size: 14px;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Hapus notifikasi setelah 3 detik
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    // Tambahkan CSS untuk animasi notifikasi
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+});

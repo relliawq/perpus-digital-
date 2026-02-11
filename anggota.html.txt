@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Perpustakaan</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="library-pattern"></div>
+        
+        <div class="auth-card">
+            <div class="book-icon">
+                <i class="fas fa-book-open"></i>
+            </div>
+            
+            <div class="toggle-buttons">
+                <button id="loginBtn" class="toggle-btn active">Masuk</button>
+                <button id="registerBtn" class="toggle-btn">Daftar</button>
+            </div>
+
+            <!-- Form Login -->
+            <div id="loginForm" class="form-container active">
+                <h2>Selamat Datang Kembali</h2>
+                <p class="subtitle">Masuk ke akun perpustakaan Anda</p>
+                
+                <form id="login">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <i class="fas fa-eye toggle-password"></i>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <label>
+                            <input type="checkbox"> Ingat saya
+                        </label>
+                        <a href="#">Lupa password?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
+                    </button>
+                </form>
+            </div>
+
+            <!-- Form Register -->
+            <div id="registerForm" class="form-container">
+                <h2>Daftar Akun Baru</h2>
+                <p class="subtitle">Bergabunglah dengan komunitas perpustakaan</p>
+                
+                <form id="register">
+                    <div class="input-group">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="regNIS" placeholder="NIS" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="regNama" placeholder="Nama" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="Email" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Password" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-users"></i>
+                        <input type="text" id="regKelas" placeholder="Kelas" required>
+                    </div>
+                    
+                    <div class="terms">
+                        <label>
+                            <input type="checkbox" required> Saya setuju dengan 
+                            <a href="#">Syarat & Ketentuan</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-user-plus"></i> Daftar
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Library Quote -->
+        <div class="quote-section">
+            <i class="fas fa-quote-right"></i>
+            <p>"Membaca adalah jendela dunia,<br>perpustakaan adalah kuncinya"</p>
+            <span>- Perpustakaan Digital -</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
