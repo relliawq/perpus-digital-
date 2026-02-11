@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Perpustakaan - Login</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="library-pattern"></div>
+        
+        <div class="auth-card">
+            <div class="book-icon">
+                <i class="fas fa-user-cog"></i>
+            </div>
+            
+            <!-- JUDUL ADMIN (BUKAN TOGGLE) -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #333; margin-bottom: 10px;">Administrator</h2>
+                <p style="color: #666; font-size: 14px;">Perpustakaan Digital</p>
+            </div>
+
+            <!-- Form Login Admin -->
+            <div id="loginForm" class="form-container active">
+                <form id="adminLogin">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Username" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password" required>
+                        <i class="fas fa-eye toggle-password"></i>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <label>
+                            <input type="checkbox"> Ingat saya
+                        </label>
+                        <a href="#" id="forgotPassword">Lupa password?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-sign-in-alt"></i> Masuk sebagai Admin
+                    </button>
+                </form>
+                
+                <!-- Link ke halaman anggota -->
+                <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Bukan admin?</p>
+                    <a href="index.html" style="color: #764ba2; text-decoration: none; font-weight: 500;">
+                        <i class="fas fa-user-graduate"></i> Login Anggota
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Library Quote ( PERSIS) -->
+        <div class="quote-section">
+            <i class="fas fa-quote-right"></i>
+            <p>"Membaca adalah jendela dunia,<br>perpustakaan adalah kuncinya"</p>
+            <span>- Perpustakaan Digital -</span>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
